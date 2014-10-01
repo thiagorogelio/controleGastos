@@ -41,7 +41,7 @@ public class mainMenu extends javax.swing.JFrame {
             query = "SELECT SUM(`valor`) AS `sum` FROM `gastos` WHERE `mes` = " + jComboBox1.getSelectedItem().toString();
             rs = Conection.sql(query);
             if(rs.next() && rs.getString("sum") != null)
-                jLabelec.setText(String.valueOf(ControleGastos.salario-Integer.parseInt(rs.getString("sum"))));
+                jLabelec.setText(String.valueOf(ControleGastos.salario-Double.parseDouble(rs.getString("sum"))));
             else
                 jLabelec.setText("0");
             
@@ -59,7 +59,9 @@ public class mainMenu extends javax.swing.JFrame {
             else
                 jLabeldes.setText("0");
             
-            
+            Fuzzy f1 = new Fuzzy(Double.parseDouble(jLabelnec.getText()), Double.parseDouble(jLabeldes.getText()));
+            jLabel3.setText(f1.getRank());
+            jLabel3.setForeground(f1.getColour());
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(mainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -145,6 +147,7 @@ public class mainMenu extends javax.swing.JFrame {
 
         jLabel2.setText("Gastos");
 
+        jLabel3.setForeground(new java.awt.Color(255, 61, 61));
         jLabel3.setText("Sovino");
 
         jLabel4.setText("Total necessários:");
@@ -301,10 +304,10 @@ public class mainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox1)))
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -367,8 +370,8 @@ public class mainMenu extends javax.swing.JFrame {
         if(jTextField1.getText().length() > 1 && jTextField2.getText().length() > 1){
             String query = "INSERT INTO `gastos` (`mes`, `descricao`, `valor`, `necessário`) VALUES ("
                     + jComboBox1.getSelectedItem().toString() +", '"
-                    +jTextField1.getText()+"', "
-                    +jTextField2.getText()+", "+jCheckBox1.isSelected() +");";
+                    +jTextField1.getText()+"', '"
+                    +jTextField2.getText()+"', "+jCheckBox1.isSelected() +");";
             Conection.update(query);
         run();
         }

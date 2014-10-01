@@ -17,8 +17,8 @@ public class ControleGastos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        salario = 1000;
-        economia = 20;
+        salario = 1500;
+        economia = 70;
         mainMenu menu = new mainMenu();
         menu.setVisible(true);
         menu.setLocation(600, 300);

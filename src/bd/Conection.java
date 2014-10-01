@@ -12,14 +12,14 @@ import java.sql.*;
  * @author maxx
  */
 public class Conection {
-    private static String driver;// = "com.mysql.jdbc.Driver"; 
-    private static String serverName;// = "localhost"; 
-    private static String mydatabase;// = "controle";
-    private static String url;// = "jdbc:mysql://" + serverName + "/" + mydatabase; 
-    private static String username;// = "root";
-    private static String password;// = "furmdjcj";
+    private static String driver;
+    private static String serverName;
+    private static String mydatabase;
+    private static String url;
+    private static String username;
+    private static String password;
     private static Boolean status;
-    private static Connection connection;// = null;
+    private static Connection connection;
     
     public Conection() {
         driver = "com.mysql.jdbc.Driver"; 
@@ -27,7 +27,7 @@ public class Conection {
         mydatabase = "controle";
         url = "jdbc:mysql://" + serverName + "/" + mydatabase; 
         username = "root";
-        password = "furmdjcj";
+        password = "";
         status = null;
     }
    
